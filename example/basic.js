@@ -1,8 +1,8 @@
 customElements.define('mega-storage', Storage);
 var Buffer = buffer.Buffer;
 var storage = new mega.Storage({
-    email: 'frontdesk@pearwoods.com',
-    password: 'Cherrybl0$$0m',
+    email: 'admin@pearwoods.com',
+    password: 'g00seberry',
     userAgent: 'ExampleApplication/1.0'
 })
 var yearFolders = [], selectedYearFolder = null;
