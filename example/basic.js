@@ -1,8 +1,8 @@
 customElements.define('mega-storage', Storage);
 var Buffer = buffer.Buffer;
 var storage = new mega.Storage({
-    email: 'admin@pearwoods.com',
-    password: 'g00seberry',
+    email: 'frontdesk@pearwoods.com',
+    password: 'Cherrybl0$$0m',
     userAgent: 'ExampleApplication/1.0'
 })
 var yearFolders = [], selectedYearFolder = null;
@@ -98,7 +98,7 @@ function compressImage(useWebWorker, file, meta) {
                 downloadLink +
                 '" download="' +
                 file.name +
-                '">download compressed image</a>';
+                '">Compressed image</a>';
             // document.getElementById('preview-after-compress').src = downloadLink
             const cd = meta.CreateDate;
             const name = cd.getFullYear() + "-" + months[cd.getMonth()] + "-" + cd.getDate() + "-" + cd.getHours() + "-" + cd.getMinutes();
