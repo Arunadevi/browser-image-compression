@@ -11,13 +11,13 @@ storage.once('ready', () => {
     $("#upload").show();
     yearFolders = storage.root.children.filter(f => f.directory === true);
     yearFolders.forEach(f => {
-        if (f.name === '2023') {
+        if (f.name === '2024') {
             $("#rootFolders").append("<option value='" + f.nodeId + "' selected>" + f.name + "</option>");
         } else {
             $("#rootFolders").append("<option value='" + f.nodeId + "'>" + f.name + "</option>");
         }
     });
-    selectedYearFolder = yearFolders.filter(f => f.name === '2023')[0];
+    selectedYearFolder = yearFolders.filter(f => f.name === '2024')[0];
 })
 
 storage.once('error', error => {
