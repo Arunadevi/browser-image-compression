@@ -100,9 +100,9 @@ function compressImage(useWebWorker, file, meta) {
                 file.name +
                 '">Compressed image</a>';
             // document.getElementById('preview-after-compress').src = downloadLink
-            const cd = meta.CreateDate;
+            const cd = meta.CreateDate || meta.DateTimeOriginal || meta.DateTimeDigitized || meta.DateTime;
             const name = cd.getFullYear() + "-" + months[cd.getMonth()] + "-" + cd.getDate() + "-" + cd.getHours() + "-" + cd.getMinutes();
-            return uploadToServer(output, name+".jpg", meta.CreateDate.getTime());
+            return uploadToServer(output, name+".jpg", cd.getTime());
         })
         .catch(function (error) {
             alert(error.message);
