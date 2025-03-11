@@ -100,9 +100,13 @@ function compressImage(useWebWorker, file, meta) {
                 file.name +
                 '">Compressed image</a>';
             // document.getElementById('preview-after-compress').src = downloadLink
+            if (meta) {
             const cd = meta.CreateDate || meta.DateTimeOriginal || meta.DateTimeDigitized || meta.DateTime;
             const name = cd.getFullYear() + "-" + months[cd.getMonth()] + "-" + cd.getDate() + "-" + cd.getHours() + "-" + cd.getMinutes();
             return uploadToServer(output, name+".jpg", cd.getTime());
+            } else {
+                return uploadToServer(output, file.name);
+            }
         })
         .catch(function (error) {
             alert(error.message);
@@ -119,7 +123,9 @@ function compressImages(event, useWebWorker) {
     for (var i = 0; i < files.length; i++) {
         var file = files[i];
         exifr.parse(file).then(function (output) {
-            console.log(output);
+            if(!output) {
+                alert("No exif data for " + file.name)
+            }
             compressImage(useWebWorker, file, output);
         })
     }
@@ -136,13 +142,19 @@ function uploadToServer(file, name, ts) {
     // This fires after the blob has been read/loaded.
     reader.addEventListener('loadend', (e) => {
         const result = e.srcElement.result;
+        if (ts) {
 
+        } else {
+
+        }
         const ufile = selectedYearFolder.upload({
             name: name, allowUploadBuffering: true, size: file.size,
             timestamp: ts
-        }, Buffer.from(result)).complete
-        console.log("uploaded");
-        $("#upload-log").html($("#upload-log").html() + "<br>Uploaded " + name + " to Mega.");
+        }, Buffer.from(result))
+        ufile.complete.then(() => {
+            $("#upload-log").html($("#upload-log").html() + "<br>Uploaded " + name + " to Mega.");
+        })
+       
     });
 
     // Start reading the blob as text.
